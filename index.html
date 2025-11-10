@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maze Escape</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Maze Escape!</h1>
+
+  <!-- Start / Rules Screen -->
+  <div id="start-screen">
+    <h2>How to Play</h2>
+    <ul>
+      <li>Use <strong>arrow keys</strong> (desktop) or on-screen buttons (mobile) to move the green player.</li>
+      <li>Navigate through the maze without touching the black walls.</li>
+      <li>Collect <span style="color: yellow;">bonus stars</span> for extra points.</li>
+      <li>Reach the <span style="color: gold;">gold exit</span> to advance to the next level.</li>
+      <li>Try to finish as fast as possible and collect as many bonuses as you can!</li>
+    </ul>
+    <button id="start-button">Start Game</button>
+  </div>
+
+  <!-- Controls -->
+  <div id="controls" style="display:none;">
+    <button id="pause-button">Pause</button>
+    <button id="restart-button">Restart Level</button>
+  </div>
+
+  <!-- Game Container -->
+  <div id="maze-container" style="display:none;">
+    <div id="player"></div>
+  </div>
+
+  <p>Time: <span id="timer">0</span> seconds | Score: <span id="score">0</span></p>
+
+  <!-- On-screen mobile controls -->
+  <div id="mobile-controls" style="display:none;">
+    <button class="move-btn" data-dir="up">↑</button><br>
+    <button class="move-btn" data-dir="left">←</button>
+    <button class="move-btn" data-dir="down">↓</button>
+    <button class="move-btn" data-dir="right">→</button>
+  </div>
+
+  <!-- Audio -->
+  <audio id="bg-music" loop>
+    <source src="background-music.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="move-sound" src="move.wav"></audio>
+  <audio id="bonus-sound" src="bonus.wav"></audio>
+  <audio id="levelup-sound" src="levelup.wav"></audio>
+
+  <script src="script.js"></script>
+</body>
+</html>
