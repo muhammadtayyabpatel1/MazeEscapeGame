@@ -14,6 +14,14 @@ const moveSound = document.getElementById('move-sound');
 const bonusSound = document.getElementById('bonus-sound');
 const levelupSound = document.getElementById('levelup-sound');
 
+// 🎵 Create Mute/Unmute button dynamically
+const muteButton = document.createElement('button');
+muteButton.id = 'mute-button';
+muteButton.textContent = '🔊 Mute';
+controls.appendChild(muteButton);
+
+let isMuted = false;
+
 let currentLevel = 0;
 let time = 0;
 let timerInterval;
@@ -142,7 +150,7 @@ function movePlayer(dir) {
     playerY = newY;
     player.style.left = playerX + 'px';
     player.style.top = playerY + 'px';
-    moveSound.play();
+    if (!isMuted) moveSound.play();
   }
 
   // Bonus collision
@@ -154,7 +162,7 @@ function movePlayer(dir) {
       score += 5;
       bonus.remove();
       scoreDisplay.textContent = score;
-      bonusSound.play();
+      if (!isMuted) bonusSound.play();
     }
   });
 
@@ -164,11 +172,20 @@ function movePlayer(dir) {
   const mazeRect = maze.getBoundingClientRect();
   const exitPos = {top: exitRect.top - mazeRect.top, left: exitRect.left - mazeRect.left, width: exitRect.width, height: exitRect.height};
   if(isColliding(playerRect, exitPos)) {
-    levelupSound.play();
+    if (!isMuted) levelupSound.play();
     alert(`Level ${currentLevel+1} completed! Score: ${score}`);
     currentLevel++;
-    if(currentLevel < levels.length) loadLevel(currentLevel);
-    else alert(`Congratulations! You finished all levels! Final Score: ${score}`);
+    if(currentLevel < levels.length) {
+      loadLevel(currentLevel);
+    } else {
+      alert(`🎉 Congratulations! You finished all levels! Final Score: ${score}`);
+      bgMusic.pause();
+      bgMusic.currentTime = 0;
+      startScreen.style.display = 'block';
+      maze.style.display = 'none';
+      controls.style.display = 'none';
+      mobileControls.style.display = 'none';
+    }
   }
 }
 
@@ -194,6 +211,11 @@ document.querySelectorAll('.move-btn').forEach(btn => {
 pauseButton.addEventListener('click', () => {
   isPaused = !isPaused;
   pauseButton.textContent = isPaused ? 'Resume' : 'Pause';
+  if (isPaused) {
+    bgMusic.pause();
+  } else if (!isMuted) {
+    bgMusic.play();
+  }
 });
 
 restartButton.addEventListener('click', () => {
@@ -202,6 +224,20 @@ restartButton.addEventListener('click', () => {
   loadLevel(currentLevel);
   isPaused = false;
   pauseButton.textContent = 'Pause';
+  bgMusic.currentTime = 0;
+  if (!isMuted) bgMusic.play();
+});
+
+// 🔇 Mute / Unmute button
+muteButton.addEventListener('click', () => {
+  isMuted = !isMuted;
+  muteButton.textContent = isMuted ? '🔈 Unmute' : '🔊 Mute';
+
+  if (isMuted) {
+    bgMusic.pause();
+  } else if (!isPaused) {
+    bgMusic.play();
+  }
 });
 
 // Start game
@@ -210,7 +246,7 @@ startButton.addEventListener('click', () => {
   maze.style.display = 'block';
   controls.style.display = 'block';
   mobileControls.style.display = 'block';
-  bgMusic.play();
+  if (!isMuted) bgMusic.play();
   loadLevel(currentLevel);
   startTimer();
 });
