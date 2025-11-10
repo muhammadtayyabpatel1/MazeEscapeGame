@@ -1,0 +1,101 @@
+body {
+  text-align: center;
+  font-family: Arial, sans-serif;
+  background-color: #e0f7fa;
+  margin: 0;
+  padding: 0;
+}
+
+h1 { margin-top: 10px; }
+
+#start-screen, #controls, #maze-container {
+  max-width: 400px;
+  margin: 10px auto;
+}
+
+#start-screen {
+  padding: 20px;
+  border: 3px solid #000;
+  background-color: #fff3e0;
+  border-radius: 10px;
+}
+
+#start-button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: green;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#start-button:hover { background-color: darkgreen; }
+
+#controls button {
+  padding: 8px 15px;
+  margin: 0 10px;
+  font-size: 14px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#controls button:hover { background-color: #0056b3; }
+
+#maze-container {
+  position: relative;
+  width: 90%;
+  max-width: 400px;
+  height: 90vw; /* responsive square */
+  max-height: 400px;
+  border: 3px solid #000;
+  background-color: #fff;
+  margin-bottom: 10px;
+}
+
+#player {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: green;
+  top: 10px;
+  left: 10px;
+}
+
+.wall {
+  position: absolute;
+  background-color: #000;
+}
+
+#exit {
+  position: absolute;
+  background-color: gold;
+}
+
+.bonus {
+  position: absolute;
+  background-color: yellow;
+  border-radius: 50%;
+}
+
+#mobile-controls {
+  max-width: 400px;
+  margin: 0 auto 20px;
+}
+
+.move-btn {
+  padding: 15px 20px;
+  font-size: 20px;
+  margin: 5px;
+  border-radius: 5px;
+  border: none;
+  background-color: #007BFF;
+  color: white;
+  cursor: pointer;
+}
+
+.move-btn:hover { background-color: #0056b3; }
